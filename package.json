@@ -4,9 +4,7 @@
   "description": "A lightweight CLI tool to streamline Vite React project setup by automating cleanup tasks such as deleting unnecessary files, resetting app structure, and simplifying the codebase.",
   "main": "cleanViteSetup.js",
   "type": "module",
-  "bin": {
-    "vitersim": "./cleanViteSetup.js"
-  },
+  "bin":  "./cleanViteSetup.js",
   "scripts": {
     "clean": "node cleanViteSetup.js",
     "test": "echo \"Error: no test specified\" && exit 1"
