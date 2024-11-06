@@ -1,0 +1,38 @@
+{
+  "name": "vitersim",
+  "version": "1.0.0",
+  "description": "A lightweight CLI tool to streamline Vite React project setup by automating cleanup tasks such as deleting unnecessary files, resetting app structure, and simplifying the codebase.",
+  "main": "cleanViteSetup.js",
+  "scripts": {
+    "clean": "node cleanViteSetup.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vite",
+    "react",
+    "project setup",
+    "vite cleaner",
+    "react automation",
+    "frontend optimization",
+    "project simplification",
+    "vite react utility",
+    "CLI tool"
+  ],
+  "author": "Selvin PaulRaj K",
+  "license": "MIT",
+  "homepage": "https://github.com/selvinpaulraj/vitersim#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/selvinpaulraj/vitersim.git"
+  },
+  "bugs": {
+    "url": "https://github.com/selvinpaulraj/vitersim/issues"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "bin": {
+    "vitersim": "cleanViteSetup.js"
+  }
+}
