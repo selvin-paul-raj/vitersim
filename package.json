@@ -1,6 +1,6 @@
 {
   "name": "vitersim",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Vitersim is a CLI tool for optimizing Vite React projects, automating cleanup of unnecessary files, simplifying component structure, and preparing for Tailwind CSS setup. Perfect for developers needing a clean and efficient Vite React starter template.",
   "main": "cleanViteSetup.js",
   "type": "module",

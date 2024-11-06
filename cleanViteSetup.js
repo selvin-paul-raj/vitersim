@@ -66,7 +66,8 @@ const deleteFile = (filePath) => {
 
 const deleteFolder = (folderPath) => {
   if (fileExists(folderPath)) {
-    fs.rmdirSync(folderPath, { recursive: true });
+    // fs.rmdirSync(folderPath, { recursive: true });
+    fs.rmSync(folderPath, { recursive: true, force: true });
     console.log(chalk.red(`Deleted folder: ${folderPath}`));
   }
 };
