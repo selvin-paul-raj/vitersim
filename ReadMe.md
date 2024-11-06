@@ -18,7 +18,11 @@
 
 ## Installation and Usage
 
-You can use **Vitersim** without installing it globally by using `npx`:
+You can install `vitersim` once globally using npm:
+```bash
+npm i -g vitersim 
+```
+You can use **Vitersim** various `vite` projects by using `npx`:
 
 ```bash
 npx vitersim
@@ -47,7 +51,7 @@ npm run clean
 ## How It Works
 
 **Vitersim** performs the following actions in a Vite React project:
-1. **Deletes `app.css`**: Removes any default styles.
+1. **Deletes `App.css`**: Removes any default styles.
 2. **Deletes the `assets` folder**: Clears unnecessary assets.
 3. **Rewrites `App.jsx` or `App.tsx`**: Updates the component to a simple "Hello World" starter.
 4. **Clears `index.css`**: Empties the main stylesheet to start fresh.
@@ -60,7 +64,7 @@ Ensure your project has the following structure for **Vitersim** to function pro
 project-root/
 ├── src/
 │   ├── App.jsx (or App.tsx)
-│   ├── app.css
+│   ├── App.css
 │   ├── assets/
 │   └── index.css
 └── ...
@@ -117,12 +121,12 @@ This project is licensed under the MIT License. See the [LICENSE](https://github
 
 ## Acknowledgments
 
-**Vitersim** was developed by [Selvin PaulRaj K](https://www.linkedin.com/in/selvinpaulrajk). We appreciate community feedback and contributions to make Vitersim better for all users.
+**Vitersim** was developed by [Selvin PaulRaj K](https://www.linkedin.com/in/selvinpaulraj). We appreciate community feedback and contributions to make Vitersim better for all users.
 
 ## Connect with Us
 
 - **Website**: [Vitersim](https://github.com/selvin-paul-raj/vitersim)
-- **LinkedIn**: [Selvin PaulRaj K](https://www.linkedin.com/in/selvinpaulrajk)
+- **LinkedIn**: [Selvin PaulRaj K](https://www.linkedin.com/in/selvinpaulraj)
 
 ---
 
