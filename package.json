@@ -1,6 +1,6 @@
 {
   "name": "vitersim",
-  "version": "2.1.1",
+  "version": "2.2.1",
   "description": "A lightweight CLI tool to streamline Vite React project setup by automating cleanup tasks such as deleting unnecessary files, resetting app structure, and simplifying the codebase.",
   "main": "cleanViteSetup.js",
   "type": "module",
@@ -24,13 +24,13 @@
   ],
   "author": "Selvin PaulRaj K",
   "license": "MIT",
-  "homepage": "https://github.com/selvinpaulraj/vitersim#readme",
+  "homepage": "https://github.com/selvin-paul-raj/vitersim#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/selvinpaulraj/vitersim.git"
+    "url": "git+https://github.com/selvin-paul-raj/vitersim.git"
   },
   "bugs": {
-    "url": "https://github.com/selvinpaulraj/vitersim/issues"
+    "url": "https://github.com/selvin-paul-raj/vitersim/issues"
   },
   "dependencies": {},
   "engines": {

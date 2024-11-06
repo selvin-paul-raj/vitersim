@@ -31,43 +31,59 @@ const fileExists = (filePath) => fs.existsSync(filePath);
 
 // Delete a file if it exists
 const deleteFile = (filePath) => {
-  if (fileExists(filePath)) {
-    fs.unlinkSync(filePath);
+  try {
+    if (fileExists(filePath)) {
+      fs.unlinkSync(filePath);
+      console.log(`Deleted: ${filePath}`);
+    }
+  } catch (error) {
+    console.error(`Error deleting ${filePath}:`, error.message);
   }
 };
 
 // Delete a folder if it exists
 const deleteFolder = (folderPath) => {
-  if (fileExists(folderPath)) {
-    fs.rmdirSync(folderPath, { recursive: true });
+  try {
+    if (fileExists(folderPath)) {
+      fs.rmSync(folderPath, { recursive: true, force: true });
+      console.log(`Deleted folder: ${folderPath}`);
+    }
+  } catch (error) {
+    console.error(`Error deleting folder ${folderPath}:`, error.message);
   }
 };
 
 // Rewrite `App.jsx` or `App.tsx` to a simple template
 const rewriteAppComponent = () => {
-  const appPath = fileExists(paths.appJsx) ? paths.appJsx : paths.appTsx;
-  if (appPath) {
-    fs.writeFileSync(appPath, newAppTemplate.trim(), 'utf-8');
-  } else {
-    console.log("No App.jsx or App.tsx file found to rewrite.");
+  try {
+    const appPath = fileExists(paths.appJsx) ? paths.appJsx : paths.appTsx;
+    if (appPath) {
+      fs.writeFileSync(appPath, newAppTemplate.trim(), 'utf-8');
+      console.log(`Rewritten component: ${appPath}`);
+    } else {
+      console.log("No App.jsx or App.tsx file found to rewrite.");
+    }
+  } catch (error) {
+    console.error(`Error rewriting component: ${error.message}`);
   }
 };
 
 // Clear the contents of `index.css`
 const clearIndexCss = () => {
-  if (fileExists(paths.indexCss)) {
-    fs.writeFileSync(paths.indexCss, '', 'utf-8');
+  try {
+    if (fileExists(paths.indexCss)) {
+      fs.writeFileSync(paths.indexCss, '', 'utf-8');
+      console.log(`Cleared contents of: ${paths.indexCss}`);
+    }
+  } catch (error) {
+    console.error(`Error clearing ${paths.indexCss}:`, error.message);
   }
 };
 
+// Execute cleanup operations
+deleteFile(paths.appCss);          
+deleteFolder(paths.assetsFolder);   
+rewriteAppComponent();              
+clearIndexCss();                   
 
-try {
-  deleteFile(paths.appCss);          
-  deleteFolder(paths.assetsFolder);   
-  rewriteAppComponent();              
-  clearIndexCss();                   
-
-  console.log("Vite React project cleanup complete.");
-} catch (error) {
-  console.error("Error during cleanup:", error.message);
-}
+console.log("Vite React project cleanup complete.");
