@@ -107,7 +107,7 @@ const displayOptions = async () => {
 };
 
 const runCleanup = async () => {
-  const confirm = await promptUser("Are you sure you want to clean up the Vite React project? (y/n): ");
+  const confirm = await promptUser("Ok to proceed? (y)");
   if (confirm !== 'y') {
     console.log(chalk.yellow("Cleanup canceled."));
     return;
