@@ -1,9 +1,5 @@
 
-
-```markdown
 # Vitersim
-
-![Vitersim Logo](https://via.placeholder.com/150) <!-- Replace with an actual logo if available -->
 
 [![npm version](https://badge.fury.io/js/vitersim.svg)](https://badge.fury.io/js/vitersim)
 [![license](https://img.shields.io/npm/l/vitersim.svg)](https://github.com/selvin-paul-raj/vitersim/blob/main/LICENSE)
