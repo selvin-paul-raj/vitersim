@@ -1,7 +1,9 @@
 #!/usr/bin/env node
-
-import path from "path";
-import fs from "fs";
+import path from 'path';
+import fs from 'fs';
+import readline from 'readline';
+import chalk from 'chalk';
+import { execSync } from 'child_process';
 
 // Define paths for main files and folders
 const paths = {
@@ -10,81 +12,128 @@ const paths = {
   appCss: path.join(process.cwd(), 'src', 'App.css'),
   assetsFolder: path.join(process.cwd(), 'src', 'assets'),
   indexCss: path.join(process.cwd(), 'src', 'index.css'),
+  tailwindConfig: path.join(process.cwd(), 'tailwind.config.js'),
 };
 
-// Template for a simple "Hello World" component
-const newAppTemplate = `
-import React from 'react';
-
-function App() {
+// Templates
+const vanillaAppTemplate = `
+export default function App() {
   return (
-    <div>
-      Hello World!
-    </div>
+    <h1>Hello world!</h1>
   );
 }
-
-export default App;
 `;
 
-// Utility function to check if a file/folder exists
+const tailwindAppTemplate = `
+export default function App() {
+  return (
+    <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1>
+  );
+}
+`;
+
+const tailwindCssContent = `
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+`;
+
+const tailwindConfigContent = `
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+`;
+
+// Utility functions
 const fileExists = (filePath) => fs.existsSync(filePath);
 
-// Delete a file if it exists
 const deleteFile = (filePath) => {
-  try {
-    if (fileExists(filePath)) {
-      fs.unlinkSync(filePath);
-      console.log(`Deleted: ${filePath}`);
-    }
-  } catch (error) {
-    console.error(`Error deleting ${filePath}:`, error.message);
+  if (fileExists(filePath)) {
+    fs.unlinkSync(filePath);
+    console.log(chalk.red(`Deleted: ${filePath}`));
   }
 };
 
-// Delete a folder if it exists
 const deleteFolder = (folderPath) => {
-  try {
-    if (fileExists(folderPath)) {
-      fs.rmSync(folderPath, { recursive: true, force: true });
-      console.log(`Deleted folder: ${folderPath}`);
-    }
-  } catch (error) {
-    console.error(`Error deleting folder ${folderPath}:`, error.message);
+  if (fileExists(folderPath)) {
+    fs.rmdirSync(folderPath, { recursive: true });
+    console.log(chalk.red(`Deleted folder: ${folderPath}`));
   }
 };
 
-// Rewrite `App.jsx` or `App.tsx` to a simple template
-const rewriteAppComponent = () => {
+const setupTailwind = () => {
+  console.log(chalk.blue("Setting up Tailwind CSS..."));
   try {
-    const appPath = fileExists(paths.appJsx) ? paths.appJsx : paths.appTsx;
-    if (appPath) {
-      fs.writeFileSync(appPath, newAppTemplate.trim(), 'utf-8');
-      console.log(`Rewritten component: ${appPath}`);
-    } else {
-      console.log("No App.jsx or App.tsx file found to rewrite.");
-    }
+    execSync("npm install -D tailwindcss postcss autoprefixer", { stdio: 'inherit' });
+    execSync("npx tailwindcss init -p", { stdio: 'inherit' });
+    fs.writeFileSync(paths.tailwindConfig, tailwindConfigContent.trim(), 'utf-8');
+    fs.writeFileSync(paths.indexCss, tailwindCssContent.trim(), 'utf-8');
+    console.log(chalk.green("Tailwind CSS setup complete."));
   } catch (error) {
-    console.error(`Error rewriting component: ${error.message}`);
+    console.error("Error during Tailwind setup:", error.message);
   }
 };
 
-// Clear the contents of `index.css`
-const clearIndexCss = () => {
-  try {
-    if (fileExists(paths.indexCss)) {
-      fs.writeFileSync(paths.indexCss, '', 'utf-8');
-      console.log(`Cleared contents of: ${paths.indexCss}`);
-    }
-  } catch (error) {
-    console.error(`Error clearing ${paths.indexCss}:`, error.message);
-  }
+// Display a selection prompt
+const promptUser = (question) => {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  return new Promise((resolve) => rl.question(question, (answer) => {
+    rl.close();
+    resolve(answer.toLowerCase());
+  }));
 };
 
-// Execute cleanup operations
-deleteFile(paths.appCss);          
-deleteFolder(paths.assetsFolder);   
-rewriteAppComponent();              
-clearIndexCss();                   
+const displayOptions = async () => {
+  console.log(chalk.blue("\nChoose an option for CSS setup:"));
+  console.log(`1. ${chalk.cyan("Vanilla CSS")}`);
+  console.log(`2. ${chalk.green("Tailwind CSS")}\n`);
 
-console.log("Vite React project cleanup complete.");
+  const choice = await promptUser("Select (1 or 2): ");
+  return choice === '2' ? 'tailwind' : 'vanilla';
+};
+
+const runCleanup = async () => {
+  const confirm = await promptUser("Are you sure you want to clean up the Vite React project? (y/n): ");
+  if (confirm !== 'y') {
+    console.log(chalk.yellow("Cleanup canceled."));
+    return;
+  }
+
+  const cssChoice = await displayOptions();
+
+  // Proceed with cleanup
+  deleteFile(paths.appCss);
+  deleteFolder(paths.assetsFolder);
+  
+  const appPath = fileExists(paths.appJsx) ? paths.appJsx : paths.appTsx;
+  if (appPath) {
+    const appTemplate = (cssChoice === 'tailwind') ? tailwindAppTemplate : vanillaAppTemplate;
+    fs.writeFileSync(appPath, appTemplate.trim(), 'utf-8');
+    console.log(chalk.blue(`App component reset with ${(cssChoice === 'tailwind') ? "Tailwind" : "vanilla"} template.`));
+  }
+
+  if (cssChoice === 'tailwind') {
+    setupTailwind();
+  } else {
+    fs.writeFileSync(paths.indexCss, '', 'utf-8');
+    console.log(chalk.green("index.css reset to empty for vanilla CSS."));
+  }
+
+  console.log(chalk.green("Cleanup complete."));
+};
+
+runCleanup().catch((error) => console.error("Error during cleanup process:", error.message));

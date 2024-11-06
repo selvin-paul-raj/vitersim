@@ -5,36 +5,46 @@
 [![license](https://img.shields.io/npm/l/vitersim.svg)](https://github.com/selvin-paul-raj/vitersim/blob/main/LICENSE)
 [![node version](https://img.shields.io/node/v/vitersim.svg)](https://nodejs.org/)
 
-### Simplify Your Vite React Project Setup
+<!--  -->
+**Vitersim** is a robust CLI tool designed to streamline Vite React project setups by automating cleanup tasks and offering a Tailwind CSS integration option. With a single command, `Vitersim` removes unnecessary files, resets styles, and sets up a clean, ready-to-code project. For developers who prefer Tailwind CSS, `Vitersim` can quickly configure Tailwind CSS with essential files and settings, making it even easier to dive straight into custom styling.
 
-**Vitersim** is a lightweight CLI tool that automates the cleanup and simplification of a new Vite React project. By deleting unnecessary files, clearing up the `index.css`, and rewriting `App.jsx` or `App.tsx` to a minimal component, **Vitersim** allows developers to start with a clean, streamlined environment.
+## Key Features
 
-## Features
-
-- **Automated Cleanup**: Deletes `App.css`, the `assets` folder, and clears `index.css`.
-- **Streamlined Structure**: Rewrites `App.jsx` or `App.tsx` to a minimal "Hello World" component.
-- **Instant CLI Execution**: Run directly with `npx vitersim`—no manual setup required.
-- **Improves Project Readiness**: Helps developers get right to coding without manual file adjustments.
+- **Automatic Cleanup**: Removes default files like `App.css` and the `assets` folder.
+- **Component Reset**: Rewrites `App.jsx` or `App.tsx` to a minimal "Hello World" component.
+- **CSS Choice**: Prompts for either **vanilla CSS** or **Tailwind CSS** setup.
+- **Instant Setup**: Directly runnable with `npx vitersim`—no installation required.
+- **Improved Project Readiness**: Ideal for developers looking for a clean, clutter-free start.
 
 ## Installation and Usage
 
+### Global Installation
+
 You can install `vitersim` once globally using npm:
+
 ```bash
-npm i -g vitersim 
+npm install -g vitersim
 ```
+
+### Quick Start with `npx`
+
 You can use **Vitersim** various `vite` projects by using `npx`:
 
 ```bash
 npx vitersim
 ```
 
-Or install it locally within your project:
+
+
+### Local Installation
+
+You can also install it locally in your project:
 
 ```bash
 npm install vitersim --save-dev
 ```
 
-Then, add a script in your `package.json` to run Vitersim:
+Then, add a custom script in your `package.json`:
 
 ```json
 "scripts": {
@@ -42,23 +52,22 @@ Then, add a script in your `package.json` to run Vitersim:
 }
 ```
 
-Run the script with:
+Now, run the cleanup script with:
 
 ```bash
 npm run clean
 ```
 
-## How It Works
+## How to Use
 
-**Vitersim** performs the following actions in a Vite React project:
-1. **Deletes `App.css`**: Removes any default styles.
-2. **Deletes the `assets` folder**: Clears unnecessary assets.
-3. **Rewrites `App.jsx` or `App.tsx`**: Updates the component to a simple "Hello World" starter.
-4. **Clears `index.css`**: Empties the main stylesheet to start fresh.
+1. **Start the Cleanup**: Run `npx vitersim` or `npm run clean`.
+2. **Confirm Cleanup**: When prompted, confirm if you'd like to proceed.
+3. **Choose Your CSS Setup**: Select either `1` for Vanilla CSS or `2` for Tailwind CSS.
+4. **Automatic Updates**: **Vitersim** will delete unneeded files, reset the main component, and set up either vanilla or Tailwind CSS based on your choice.
 
-## Project Requirements
+## Structure Requirements
 
-Ensure your project has the following structure for **Vitersim** to function properly:
+To work effectively, your Vite React project should have this file structure:
 
 ```plaintext
 project-root/
@@ -72,7 +81,7 @@ project-root/
 
 ## Example Output
 
-After running `vitersim`, your `App.jsx` (or `App.tsx`) will be reset to:
+After running **Vitersim**, your `App.jsx` or `App.tsx` will be reset to:
 
 ```javascript
 import React from 'react';
@@ -88,46 +97,45 @@ function App() {
 export default App;
 ```
 
-## Technical Details
+If you selected **Tailwind CSS** during setup, `index.css` will include Tailwind directives:
 
-Vitersim uses Node.js's `fs` and `path` modules to interact with the file system. It follows an asynchronous, modular approach to ensure non-blocking operations and robust error handling.
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+## Technical Overview
+
+**Vitersim** is a Node.js-based CLI tool that leverages `fs` and `path` modules for file management. It also uses `chalk` for color-coded prompts and outputs, making the user interaction intuitive. For those opting for Tailwind CSS, **Vitersim** runs commands to initialize Tailwind and updates the `tailwind.config.js` file with appropriate configurations.
 
 ## Compatibility
 
-| Dependency | Version      |
-|------------|--------------|
-| Node.js    | >= 14.0.0    |
-| Vite       | 3.x and above |
-| React      | 17.x and above |
+| Dependency  | Version           |
+|-------------|-------------------|
+| Node.js     | >= 14.0.0         |
+| Vite        | >= 3.x            |
+| React       | >= 17.x           |
 
 ## Troubleshooting
 
-If you encounter issues, check that:
-1. The file and folder names match (`app.css`, `assets`, `App.jsx` or `App.tsx`, and `index.css`).
-2. You have sufficient file permissions in your project directory.
+If you run into issues:
+1. Ensure the required files and folders (`App.css`, `assets`, `App.jsx` or `App.tsx`, and `index.css`) are present.
+2. Check that you have write permissions in your project directory.
 
-For additional help, please open an issue on [GitHub](https://github.com/selvin-paul-raj/vitersim/issues).
+For additional help, please visit the [GitHub issues page](https://github.com/selvin-paul-raj/vitersim/issues).
 
 ## Contributing
 
-We welcome contributions to enhance **Vitersim**! To contribute:
+We welcome contributions to improve **Vitersim**. To contribute:
 1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Submit a pull request with a detailed explanation of changes.
+2. Create a branch with your feature or bug fix.
+3. Submit a pull request with a description of your changes.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/selvin-paul-raj/vitersim/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License. For details, see the [LICENSE](https://github.com/selvin-paul-raj/vitersim/blob/main/LICENSE) file.
 
-## Acknowledgments
+## Connect with the Creator
 
-**Vitersim** was developed by [Selvin PaulRaj K](https://www.linkedin.com/in/selvinpaulraj). We appreciate community feedback and contributions to make Vitersim better for all users.
-
-## Connect with Us
-
-- **Website**: [Vitersim](https://github.com/selvin-paul-raj/vitersim)
-- **LinkedIn**: [Selvin PaulRaj K](https://www.linkedin.com/in/selvinpaulraj)
-
----
-
-
+Developed by [Selvin PaulRaj K](https://www.linkedin.com/in/selvinpaulraj). For feedback and contributions, feel free to connect!

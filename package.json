@@ -1,38 +1,44 @@
 {
   "name": "vitersim",
-  "version": "2.3.1",
-  "description": "A lightweight CLI tool to streamline Vite React project setup by automating cleanup tasks such as deleting unnecessary files, resetting app structure, and simplifying the codebase.",
+  "version": "2.4.0",
+  "description": "Vitersim is a CLI tool for optimizing Vite React projects, automating cleanup of unnecessary files, simplifying component structure, and preparing for Tailwind CSS setup. Perfect for developers needing a clean and efficient Vite React starter template.",
   "main": "cleanViteSetup.js",
   "type": "module",
-  "bin":  "./cleanViteSetup.js",
+  "bin":"./cleanViteSetup.js",
   "scripts": {
     "clean": "node cleanViteSetup.js",
+    "start": "node cleanViteSetup.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "vite",
     "react",
-    "project setup",
-    "vite cleaner",
-    "react automation",
-    "frontend optimization",
-    "project simplification",
-    "vite react utility",
-    "CLI tool"
+    "vite react cleanup",
+    "vite automation",
+    "frontend setup",
+    "project optimization",
+    "tailwind setup",
+    "CLI utility",
+    "vite react project simplification",
+    "vite react automation tool",
+    "vitersim",
+    "tailwind integration",
+    "developer productivity"
   ],
   "author": "Selvin PaulRaj K",
   "license": "MIT",
   "homepage": "https://github.com/selvin-paul-raj/vitersim#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/selvin-paul-raj/vitersim.git"
+    "url": "https://github.com/selvin-paul-raj/vitersim.git"
   },
   "bugs": {
     "url": "https://github.com/selvin-paul-raj/vitersim/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "chalk": "^5.3.0"
+  },
   "engines": {
     "node": ">=14.0.0"
   }
-  
 }
